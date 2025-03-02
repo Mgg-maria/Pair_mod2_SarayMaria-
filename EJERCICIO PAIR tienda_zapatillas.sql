@@ -1,4 +1,4 @@
-CREATE SCHEMA tienda_zapatillas;
+-- CREATE SCHEMA tienda_zapatillas;
 USE tienda_zapatillas;
 
 CREATE TABLE tabla_zapatillas (
@@ -40,7 +40,7 @@ CREATE TABLE facturas (
     id_empleado int not null,
     id_cliente int not null,
     
-    primary key (id_factura),
+    primary key (id_factura, id_zapatilla, id_empleado, id_cliente),
     
     constraint fK_1
 		foreign key (id_zapatilla)
@@ -56,8 +56,8 @@ CREATE TABLE facturas (
 
 );
     
-    ALTER TABLE tabla_zapatillas
-    ADD COLUMN marca VARCHAR(45) NOT NULL;
+ALTER TABLE tabla_zapatillas
+ADD COLUMN marca VARCHAR(45) NOT NULL;
     
     
  ALTER TABLE tabla_zapatillas
@@ -74,7 +74,7 @@ ADD COLUMN total FLOAT;
 
 
 INSERT INTO tabla_zapatillas(id_zapatilla,modelo,color,marca,talla)
-VALUES (1,"XQYUN","Negro","Nike",42),
+VALUES (1,"XQYUN","Negro","Nike",42);
 	
 INSERT INTO tabla_zapatillas(id_zapatilla,modelo,color,marca,talla)  
 VALUES (2,"UOPMN","Rosas","Nike",39),
@@ -82,7 +82,6 @@ VALUES (2,"UOPMN","Rosas","Nike",39),
     
 SELECT *
 FROM tabla_zapatillas;
-
 
 
 INSERT INTO empleados (id_empleado,nombre,tienda,salario,fecha_incorporacion)
@@ -111,9 +110,28 @@ FROM facturas;
 
 UPDATE tabla_zapatillas
 SET color="Amarillas"
-WHERE color="Rosas"
+WHERE color="Rosas";
 
 SELECT *
 FROM tabla_zapatillas;
 
-SET SQL_SAFE_UPDATES = 0
+SET SQL_SAFE_UPDATES = 0;
+
+UPDATE empleados 
+SET Tienda = "Madrid"
+where Nombre = "Laura";
+
+SELECT *
+FROM empleados;
+
+
+UPDATE clientes 
+SET num_telefono = 123456728
+where Nombre = "Monica";
+
+
+UPDATE facturas 
+SET total = 89.91
+where id_zapatilla =2;
+
+
